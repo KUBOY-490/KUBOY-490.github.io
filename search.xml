@@ -4,11 +4,36 @@
   
     
     <entry>
+      <title>docker中部署MYSQL</title>
+      <link href="/2021/10/10/docker%E4%B8%AD%E9%83%A8%E7%BD%B2MYSQL/"/>
+      <url>/2021/10/10/docker%E4%B8%AD%E9%83%A8%E7%BD%B2MYSQL/</url>
+      
+        <content type="html"><![CDATA[<h1 id="MYSQL"><a href="#MYSQL" class="headerlink" title="MYSQL"></a>MYSQL</h1><h2 id="一、下载"><a href="#一、下载" class="headerlink" title="一、下载"></a>一、下载</h2><pre><code>docker pull mysql</code></pre><h2 id="二、启动"><a href="#二、启动" class="headerlink" title="二、启动"></a>二、启动</h2><pre><code>docker run -p 3306:3306 --name 21mysql -v /project/mysql/conf:/etc/mysql/conf.d -v /project/mysql/logs:/logs -v /project/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234567 -d mysql// -e 初始化密码// -v 数据卷</code></pre><ul><li>-p  3306:3306   因为MYSQL的默认端口是3306</li></ul><h2 id="三、进入mysql"><a href="#三、进入mysql" class="headerlink" title="三、进入mysql"></a>三、进入mysql</h2><pre><code>docker exec -it 21mysql /bin/bashmysql -uroot -p1234567输入密码</code></pre><h2 id="四、设置数据库远程连接"><a href="#四、设置数据库远程连接" class="headerlink" title="四、设置数据库远程连接"></a>四、设置数据库远程连接</h2><ol><li>新建用户</li></ol><pre class=" language-mysql"><code class="language-mysql"> #创建新的远程用户及密码 CREATE USER 'jim'@'%' IDENTIFIED BY '123456'; #设置远程登录  ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '1234567'; </code></pre><p>​    </p><ol start="2"><li><p>设置权限</p><ol><li><h4 id="所有数据库的所有权限"><a href="#所有数据库的所有权限" class="headerlink" title="所有数据库的所有权限"></a>所有数据库的所有权限</h4><pre class=" language-mysql"><code class="language-mysql">grant all privileges on *.* to 'jim'@'%';#刷新FLUSH PRIVILEGES;</code></pre></li></ol></li><li><p>设置 testDB 数据库的所有权限</p><pre class=" language-mysql"><code class="language-mysql">//@localhost 是本地连接grant all privileges on testDB.* to 'jim'@localhost identified by '1234';//@'%' 远程grant all privileges on mogudb.* to 'jim'@'%';flush privileges;//刷新系统权限表</code></pre></li><li><p>设置 testDB 数据库的部分权限</p><p> ****   赋予了 <strong>查询和更新</strong> 的权限</p><pre class=" language-mysql"><code class="language-mysql">grant select,update on testDB.* to test@localhost identified by '1234';flush privileges; //刷新系统权限表</code></pre></li><li><p>修改密码</p><pre class=" language-mysql"><code class="language-mysql">update mysql.user set password=password('新密码') where User="test" and Host="localhost";flush privileges;</code></pre></li><li><p>删除用户及权限</p><pre class=" language-mysql"><code class="language-mysql">#删除远程用户drop user 用户名@'%';#例如:drop 'jim'@'%';#删除本地用户drop user 用户名@localhost; </code></pre></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MYSQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>docker中部署Tomcat</title>
       <link href="/2021/10/10/docker%E4%B8%AD%E9%83%A8%E7%BD%B2Tomcat/"/>
       <url>/2021/10/10/docker%E4%B8%AD%E9%83%A8%E7%BD%B2Tomcat/</url>
       
-        <content type="html"><![CDATA[<h1 id="tomcat相关操作"><a href="#tomcat相关操作" class="headerlink" title="tomcat相关操作"></a>tomcat相关操作</h1><h2 id="一、下载"><a href="#一、下载" class="headerlink" title="一、下载"></a>一、下载</h2><pre><code>docker pull tomcat//指定版本号：docker pull tomcat:9.0</code></pre><h2 id="二、启动Tomcat"><a href="#二、启动Tomcat" class="headerlink" title="二、启动Tomcat"></a>二、启动Tomcat</h2><h3 id="第一种："><a href="#第一种：" class="headerlink" title="第一种："></a>第一种：</h3><pre class=" language-makefile"><code class="language-makefile"><span class="token symbol">docekr run -p 8080</span><span class="token punctuation">:</span>8080  -it --name xxxtomcat tomcat <span class="token symbol">docekr run -p 80</span><span class="token punctuation">:</span>8080  -it --name 0926tomcat -d tomcat </code></pre><h3 id="第二种："><a href="#第二种：" class="headerlink" title="第二种："></a>第二种：</h3><pre><code>docker run -p 8081:8080 -it tomcat /bin/bashcd /bin./startup.sh</code></pre><h3 id="第三种："><a href="#第三种：" class="headerlink" title="第三种："></a>第三种：</h3><pre><code>docker create --name 0926tomcat -p 80:8080 -v /project/demo1://usr/local/tomcat/webapps tomcatdocker create --name 1009tomcat -p 80:8080 -v /project/demo2://usr/local/tomcat/webapps/ROOT/ tomcatdocker create --name 1009nginx -p 80:80 -v /project/1009nginx://home/website nginx//docker create --name 1010tomcat -p 80:8080 -v /home/www/website://usr/local/tomcat/webapps/ROOT tomcat</code></pre><h2 id="三、进入Tomcat里"><a href="#三、进入Tomcat里" class="headerlink" title="三、进入Tomcat里"></a>三、进入Tomcat里</h2><pre><code>docker exec -it xxxtomcat /bin/bash//把/project/demo1里的文件 复制到 容器里docker cp /project/demo1 xxxtomcat://usr/local/tomcat/webapps</code></pre><h2 id="默认访问的文件"><a href="#默认访问的文件" class="headerlink" title="默认访问的文件"></a>默认访问的文件</h2><p><strong>Tomcat默认打开/usr/local/tomcat/webapps/ROOT/index.html</strong></p>]]></content>
+        <content type="html"><![CDATA[<h1 id="tomcat相关操作"><a href="#tomcat相关操作" class="headerlink" title="tomcat相关操作"></a>tomcat相关操作</h1><h2 id="一、下载"><a href="#一、下载" class="headerlink" title="一、下载"></a>一、下载</h2><pre><code>docker pull tomcat//指定版本号：docker pull tomcat:9.0</code></pre><h2 id="二、启动Tomcat"><a href="#二、启动Tomcat" class="headerlink" title="二、启动Tomcat"></a>二、启动Tomcat</h2><h3 id="第一种："><a href="#第一种：" class="headerlink" title="第一种："></a>第一种：</h3><pre><code>docekr run -p 8080:8080  -it --name xxxtomcat tomcat docekr run -p 80:8080  -it --name 0926tomcat -d tomcat </code></pre><h3 id="第二种："><a href="#第二种：" class="headerlink" title="第二种："></a>第二种：</h3><pre><code>docker run -p 8081:8080 -it tomcat /bin/bashcd /bin./startup.sh</code></pre><h3 id="第三种："><a href="#第三种：" class="headerlink" title="第三种："></a>第三种：</h3><pre><code>docker create --name 0926tomcat -p 80:8080 -v /project/demo1://usr/local/tomcat/webapps tomcat</code></pre><ul><li>-p 80:8080  80是外部访问的端口，8080是Tomcat监事的端口，80:8080 把Tomcat的8080端口映射到服务器的80端口</li><li>-v 是添加数据卷, <strong>:</strong> 前面的的是服务器的/本地的路径(目录/文件夹)</li></ul><h2 id="三、进入Tomcat里"><a href="#三、进入Tomcat里" class="headerlink" title="三、进入Tomcat里"></a>三、进入Tomcat里</h2><pre><code>docker exec -it xxxtomcat /bin/bash//把/project/demo1里的文件 复制到 容器里docker cp /project/demo1 xxxtomcat://usr/local/tomcat/webapps</code></pre><h2 id="默认访问的文件"><a href="#默认访问的文件" class="headerlink" title="默认访问的文件"></a>默认访问的文件</h2><p><strong>Tomcat默认打开/usr/local/tomcat/webapps/ROOT/index.html</strong></p>]]></content>
       
       
       <categories>
