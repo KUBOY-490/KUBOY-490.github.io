@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>docker中部署Tomcat</title>
+      <link href="/2021/10/10/docker%E4%B8%AD%E9%83%A8%E7%BD%B2Tomcat/"/>
+      <url>/2021/10/10/docker%E4%B8%AD%E9%83%A8%E7%BD%B2Tomcat/</url>
+      
+        <content type="html"><![CDATA[<h1 id="tomcat相关操作"><a href="#tomcat相关操作" class="headerlink" title="tomcat相关操作"></a>tomcat相关操作</h1><h2 id="一、下载"><a href="#一、下载" class="headerlink" title="一、下载"></a>一、下载</h2><pre><code>docker pull tomcat//指定版本号：docker pull tomcat:9.0</code></pre><h2 id="二、启动Tomcat"><a href="#二、启动Tomcat" class="headerlink" title="二、启动Tomcat"></a>二、启动Tomcat</h2><h3 id="第一种："><a href="#第一种：" class="headerlink" title="第一种："></a>第一种：</h3><pre class=" language-makefile"><code class="language-makefile"><span class="token symbol">docekr run -p 8080</span><span class="token punctuation">:</span>8080  -it --name xxxtomcat tomcat <span class="token symbol">docekr run -p 80</span><span class="token punctuation">:</span>8080  -it --name 0926tomcat -d tomcat </code></pre><h3 id="第二种："><a href="#第二种：" class="headerlink" title="第二种："></a>第二种：</h3><pre><code>docker run -p 8081:8080 -it tomcat /bin/bashcd /bin./startup.sh</code></pre><h3 id="第三种："><a href="#第三种：" class="headerlink" title="第三种："></a>第三种：</h3><pre><code>docker create --name 0926tomcat -p 80:8080 -v /project/demo1://usr/local/tomcat/webapps tomcatdocker create --name 1009tomcat -p 80:8080 -v /project/demo2://usr/local/tomcat/webapps/ROOT/ tomcatdocker create --name 1009nginx -p 80:80 -v /project/1009nginx://home/website nginx//docker create --name 1010tomcat -p 80:8080 -v /home/www/website://usr/local/tomcat/webapps/ROOT tomcat</code></pre><h2 id="三、进入Tomcat里"><a href="#三、进入Tomcat里" class="headerlink" title="三、进入Tomcat里"></a>三、进入Tomcat里</h2><pre><code>docker exec -it xxxtomcat /bin/bash//把/project/demo1里的文件 复制到 容器里docker cp /project/demo1 xxxtomcat://usr/local/tomcat/webapps</code></pre><h2 id="默认访问的文件"><a href="#默认访问的文件" class="headerlink" title="默认访问的文件"></a>默认访问的文件</h2><p><strong>Tomcat默认打开/usr/local/tomcat/webapps/ROOT/index.html</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> docker </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Tomcat </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>linux安装docker</title>
       <link href="/2021/10/10/linux%E5%AE%89%E8%A3%85docker/"/>
       <url>/2021/10/10/linux%E5%AE%89%E8%A3%85docker/</url>
