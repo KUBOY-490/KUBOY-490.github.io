@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>linux安装docker</title>
+      <link href="/2021/10/10/linux%E5%AE%89%E8%A3%85docker/"/>
+      <url>/2021/10/10/linux%E5%AE%89%E8%A3%85docker/</url>
+      
+        <content type="html"><![CDATA[<h1 id="安装DOCKER"><a href="#安装DOCKER" class="headerlink" title="安装DOCKER"></a>安装DOCKER</h1><ol><li>先安装一些系统工具</li><li>添加软件源信息：</li><li>更新并且安装Docker-ce</li><li>启动Docker</li></ol><pre><code>yum install -y yum-utils device-mapper-persistent-data lvm2yum-config-manager --add-repo  http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repoyum makecache fastyum -y install docker-ceservice docker start</code></pre><pre><code>镜像加速器sudo mkdir -p /etc/dockersudo tee /etc/docker/daemon.json &lt;&lt;-&#39;EOF&#39;&#123;  &quot;registry-mirrors&quot;: [&quot;https://7n7zsvyk.mirror.aliyuncs.com&quot;]&#125;EOFsudo systemctl daemon-reloadsudo systemctl restart docker</code></pre><h1 id="启动docker后台"><a href="#启动docker后台" class="headerlink" title="启动docker后台"></a>启动docker后台</h1><ol><li>docker run  hello-world</li><li>docker images<ol><li>REPOSITORY</li><li>TAG   版本号</li><li>IMAGE ID   镜像ID（同一个镜像的<strong>ID相同</strong>且<strong>唯一的</strong>）</li><li>CREATED    镜像创建时间</li><li>SIZE     镜像大小</li></ol></li></ol><h2 id="1-获取镜像"><a href="#1-获取镜像" class="headerlink" title="1.获取镜像"></a>1.获取镜像</h2><ol><li><pre><code> docker pull centos</code></pre><ol><li>这样会下载最新的CentOS版本</li></ol></li><li><pre><code> docker pull cenos:7</code></pre><ol><li>指定下载的版本号</li></ol></li></ol><h2 id="2-查看本地镜像"><a href="#2-查看本地镜像" class="headerlink" title="2.查看本地镜像"></a>2.查看本地镜像</h2><ol><li><p>查看所有的本地镜像</p><ol><li><pre><code> docker images docker images -a</code></pre></li><li><p><strong>-a    含中间映像层</strong></p></li><li><p>只查看镜像的ID</p><ol><li><pre><code> docker images -aq</code></pre></li></ol></li></ol></li><li><p>查看单个镜像的信息</p><ol><li><pre><code> docker images tomcat docker images centos</code></pre></li></ol></li><li><p>查看完整的信息</p><ol><li><pre><code> docker images --digests</code></pre></li><li><pre><code> docker images --digests --no-trunc</code></pre></li><li><p>–no-trunc   显示完整的ID信息</p></li></ol></li></ol><h2 id="3-搜索某个镜像"><a href="#3-搜索某个镜像" class="headerlink" title="3.搜索某个镜像"></a>3.搜索某个镜像</h2><ol><li><pre><code> docker search centos docker search -s 10 centos docker search --automated centos</code></pre></li></ol><h2 id="4-删除镜像"><a href="#4-删除镜像" class="headerlink" title="4.删除镜像"></a>4.删除镜像</h2><ol><li><ol><li><pre><code> docker rmi -f (IMAGE ID) docker rmi -f 镜像名1 镜像名2 ... /* 删除多个镜像 */</code></pre></li><li><pre><code> docker rmi -f $(docker images -aq)</code></pre></li></ol></li><li><p>强制删除镜像，而不进行提示确认 <strong>( -f,force )</strong></p><ol><li><pre><code> docker images prune -f</code></pre></li><li><p><strong>docker images prune</strong></p><ol><li><strong>-a .-all:</strong>    删除所有无用镜像，不光是临时镜像</li><li><strong>-filter,  filter:</strong>      只清理符合给定过滤器的镜像</li><li><strong>-f,dorce:</strong>      强制删除镜像，而不进行提示确认</li></ol></li></ol></li></ol><h2 id="5-创建镜像"><a href="#5-创建镜像" class="headerlink" title="5.创建镜像"></a>5.创建镜像</h2><p>略</p><h1 id="操作docker容器"><a href="#操作docker容器" class="headerlink" title="操作docker容器"></a>操作docker容器</h1><p>镜像是静态的只读文件，而容器带有运行时需要的可写文件层，同时，容器中的<strong>应用进程</strong>处于<strong>运行状态</strong></p><ol><li><p>进入Ubuntu镜像：</p><ol><li><pre><code> docker run -it ubuntu /bin/sh</code></pre></li><li><p>退出ubuntu：</p></li><li><pre><code> exit</code></pre></li></ol></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/2021/10/10/hello-world/"/>
       <url>/2021/10/10/hello-world/</url>
