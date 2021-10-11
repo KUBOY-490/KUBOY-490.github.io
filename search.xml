@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Qt利用Git版本控制</title>
+      <link href="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
+      <url>/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、创建gitee账号"><a href="#一、创建gitee账号" class="headerlink" title="一、创建gitee账号"></a>一、创建gitee账号</h2><h2 id="二、创建仓库"><a href="#二、创建仓库" class="headerlink" title="二、创建仓库"></a>二、创建仓库</h2><ol><li><img src="/home/git/images/Qtimg/1.png"></li><li><img src="/home/git/images/Qtimg/2.png"></li><li>仓库刚创建完成后，会有http和ssh地址，建议复制到记事本上</li><li><img src="/home/git/images/Qtimg/3.png"></li><li>这个页面暂时<strong>不要关闭</strong>  ，<strong>不要有任何操作</strong>   可以先最小化窗口</li></ol><h2 id="三、创建Qt项目"><a href="#三、创建Qt项目" class="headerlink" title="三、创建Qt项目"></a>三、创建Qt项目</h2><ol><li><img src="/home/git/images/Qtimg/4.png"></li><li><img src="/home/git/images/Qtimg/5.png"></li><li><img src="/home/git/images/Qtimg/6.png"></li><li><img src="/home/git/images/Qtimg/7.png"></li><li><img src="/home/git/images/Qtimg/8.png"></li><li><img src="/home/git/images/Qtimg/9.png"></li><li><img src="/home/git/images/Qtimg/10.png"></li><li>点Apply，之后点击OK，下一步。项目创建成功，可以先构建、运行</li></ol><h2 id="四、Qt中写代码并上传到Gitee仓库"><a href="#四、Qt中写代码并上传到Gitee仓库" class="headerlink" title="四、Qt中写代码并上传到Gitee仓库"></a>四、Qt中写代码并上传到Gitee仓库</h2><ol><li><p>在本地创建仓库</p></li><li><pre class=" language-git"><code class="language-git">git config --global user.name <span class="token string">"Gitee账号"</span>git config --global user.email <span class="token string">"Gitee绑定的邮箱"</span>mkdir qt-projectcd qt-projectgit inittouch README.mdgit add README.mdgit commit -m <span class="token string">"first commit"</span>git remote add origin git@gitee.com:Gitee仓库地址git push -u origin master</code></pre><p> <img src="/home/git/images/Qtimg/12.png" alt="Git bash"></p></li><li><p> 整合代码</p></li><li><p><img src="/home/git/images/Qtimg/11.png" alt="整合代码"></p></li><li><p><img src="/home/git/images/Qtimg/14.png"></p></li><li><p>上传代码到Gitee</p></li><li><p><img src="/home/git/images/Qtimg/141.png"></p></li><li><p><img src="/home/git/images/Qtimg/142.png"></p></li><li><p><img src="/home/git/images/Qtimg/143.png"></p></li><li><p><img src="/home/git/images/Qtimg/15.png"></p></li><li><p>看到上图，说明上传成功了，可以到Gitee查看刚才创建的仓库(<strong>需要刷新</strong>)</p></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Qt </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Qt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>docker中部署MYSQL</title>
       <link href="/2021/10/10/docker%E4%B8%AD%E9%83%A8%E7%BD%B2MYSQL/"/>
       <url>/2021/10/10/docker%E4%B8%AD%E9%83%A8%E7%BD%B2MYSQL/</url>
