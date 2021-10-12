@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Qt利用Git版本控制, kute blog">
+    <meta name="keywords" content="docker中部署MYSQL, kute blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Qt利用Git版本控制 | kute blog</title>
+    <title>docker中部署MYSQL | kute blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Qt利用Git版本控制</h1>
+                    <h1 class="description center-align post-title">docker中部署MYSQL</h1>
                 </div>
             </div>
         </div>
@@ -430,8 +430,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Qt/">
-                                <span class="chip bg-color">Qt</span>
+                            <a href="/tags/MYSQL/">
+                                <span class="chip bg-color">MYSQL</span>
                             </a>
                         
                     </div>
@@ -442,8 +442,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Qt/" class="post-category">
-                                Qt
+                            <a href="/categories/docker/" class="post-category">
+                                docker
                             </a>
                         
                     </div>
@@ -455,7 +455,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2021-10-11
+                    2021-10-10
                 </div>
                 
 
@@ -464,7 +464,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    231
+                    292
                 </div>
                 
 
@@ -491,76 +491,71 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一、创建gitee账号"><a href="#一、创建gitee账号" class="headerlink" title="一、创建gitee账号"></a>一、创建gitee账号</h2><h2 id="二、创建仓库"><a href="#二、创建仓库" class="headerlink" title="二、创建仓库"></a>二、创建仓库</h2><ol>
-<li><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/1.png" alt="创建仓库"></li>
-<li><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/2.png"></li>
-<li>仓库刚创建完成后，会有http和ssh地址，建议复制到记事本上</li>
-<li><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/3.png" alt="给仓库起名字"></li>
-<li>这个页面暂时<strong>不要关闭</strong>  ，<strong>不要有任何操作</strong>   可以先最小化窗口</li>
+                <h1 id="MYSQL"><a href="#MYSQL" class="headerlink" title="MYSQL"></a>MYSQL</h1><h2 id="一、下载"><a href="#一、下载" class="headerlink" title="一、下载"></a>一、下载</h2><pre><code>docker pull mysql
+</code></pre>
+<h2 id="二、启动"><a href="#二、启动" class="headerlink" title="二、启动"></a>二、启动</h2><pre><code>docker run -p 3306:3306 --name 21mysql -v /project/mysql/conf:/etc/mysql/conf.d -v /project/mysql/logs:/logs -v /project/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=1234567 -d mysql
+// -e 初始化密码
+// -v 数据卷
+</code></pre>
+<ul>
+<li>-p  3306:3306   因为MYSQL的默认端口是3306</li>
+</ul>
+<h2 id="三、进入mysql"><a href="#三、进入mysql" class="headerlink" title="三、进入mysql"></a>三、进入mysql</h2><pre><code>docker exec -it 21mysql /bin/bash
+mysql -uroot -p1234567
+输入密码
+</code></pre>
+<h2 id="四、设置数据库远程连接"><a href="#四、设置数据库远程连接" class="headerlink" title="四、设置数据库远程连接"></a>四、设置数据库远程连接</h2><ol>
+<li>新建用户</li>
 </ol>
-<h2 id="三、创建Qt项目"><a href="#三、创建Qt项目" class="headerlink" title="三、创建Qt项目"></a>三、创建Qt项目</h2><ol>
-<li><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/4.png" alt="新建项目"></li>
-<li><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/5.png" alt="点击choose"></li>
-<li><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/6.png" alt="下一步"></li>
-<li><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/7.png" alt="下一步"></li>
-<li><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/8.png" alt="下一步"></li>
-<li><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/9.png" alt="版本控制系统：Git"></li>
-<li><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/10.png" alt="填Git安装的路径（目录）"></li>
-<li>点Apply，之后点击OK，下一步。项目创建成功，可以先构建、运行</li>
-</ol>
-<h2 id="四、Qt中写代码并上传到Gitee仓库"><a href="#四、Qt中写代码并上传到Gitee仓库" class="headerlink" title="四、Qt中写代码并上传到Gitee仓库"></a>四、Qt中写代码并上传到Gitee仓库</h2><ol>
-<li>在本地创建仓库</li>
-</ol>
+<pre class=" language-mysql"><code class="language-mysql"> #创建新的远程用户及密码
+ CREATE USER 'jim'@'%' IDENTIFIED BY '123456';
+ #设置远程登录 
+ ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '1234567'; 
+</code></pre>
+<p>​    </p>
 <ol start="2">
-<li><pre class=" language-git"><code class="language-git"> git config --global user.name <span class="token string">"Gitee账号"</span>
- 
- git config --global user.email <span class="token string">"Gitee绑定的邮箱"</span>
- 
- mkdir qt-project
- 
- cd qt-project
- 
- git init
- 
- touch README.md
- 
- git add README.md
- 
- git commit -m <span class="token string">"first commit"</span>
- 
- git remote add origin git@gitee.com:Gitee仓库地址
- 
- git push -u origin master
- 
+<li><p>设置权限</p>
+<ol>
+<li><h4 id="所有数据库的所有权限"><a href="#所有数据库的所有权限" class="headerlink" title="所有数据库的所有权限"></a>所有数据库的所有权限</h4><pre class=" language-mysql"><code class="language-mysql">grant all privileges on *.* to 'jim'@'%';
+#刷新
+FLUSH PRIVILEGES;
 </code></pre>
-<p> <img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/12.png" alt="Git bash"></p>
-</li>
-<li><p>整合代码</p>
-</li>
-<li><p><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/11.png" alt="整合代码"></p>
-</li>
-<li><p><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/13.png" alt="如果有改动，则整合"></p>
-</li>
-<li><p>上传代码到Gitee</p>
-</li>
-<li><p><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/14.png" alt="使用Git Gui工具"></p>
-</li>
-<li><p><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/15.png" alt="先commit，再Push"></p>
-</li>
-<li><p><strong>Push</strong> 是上传</p>
-</li>
-<li><p><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/16.png"></p>
-</li>
-<li><p><strong>Source Branches</strong> 是选择代码分支</p>
 </li>
 </ol>
-<pre><code> 1. **Arbitrary Location:**  填写Gitee仓库的SSH地址（git@ 开头）
- 2. 点**Push**
-</code></pre>
-<ol start="12">
-<li><p><img src="/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/17.png" alt="代码上传成功了！"></p>
 </li>
-<li><p>看到上图，说明上传成功了，可以到Gitee查看刚才创建的仓库(<strong>需要刷新</strong>)</p>
+<li><p>设置 testDB 数据库的所有权限</p>
+<pre class=" language-mysql"><code class="language-mysql">//@localhost 是本地连接
+grant all privileges on testDB.* to 'jim'@localhost identified by '1234';
+
+//@'%' 远程
+grant all privileges on mogudb.* to 'jim'@'%';
+
+flush privileges;
+//刷新系统权限表
+</code></pre>
+</li>
+<li><p>设置 testDB 数据库的部分权限</p>
+<p> ****   赋予了 <strong>查询和更新</strong> 的权限</p>
+<pre class=" language-mysql"><code class="language-mysql">grant select,update on testDB.* to test@localhost identified by '1234';
+
+flush privileges; //刷新系统权限表
+</code></pre>
+</li>
+<li><p>修改密码</p>
+<pre class=" language-mysql"><code class="language-mysql">update mysql.user set password=password('新密码') where User="test" and Host="localhost";
+
+flush privileges;
+</code></pre>
+</li>
+<li><p>删除用户及权限</p>
+<pre class=" language-mysql"><code class="language-mysql">#删除远程用户
+drop user 用户名@'%';
+#例如:
+drop 'jim'@'%';
+
+#删除本地用户
+drop user 用户名@localhost; 
+</code></pre>
 </li>
 </ol>
 
@@ -589,7 +584,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://kutbidin.top/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">http://kutbidin.top/2021/10/11/Qt%E5%88%A9%E7%94%A8Git%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/</a>
+                    <a href="http://kutbidin.top/2021/10/10/docker-zhong-bu-shu-mysql/">http://kutbidin.top/2021/10/10/docker-zhong-bu-shu-mysql/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -627,8 +622,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Qt/">
-                                    <span class="chip bg-color">Qt</span>
+                                <a href="/tags/MYSQL/">
+                                    <span class="chip bg-color">MYSQL</span>
                                 </a>
                             
                         </div>
@@ -804,31 +799,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2021/10/12/%E8%BD%BB%E9%87%8F%E7%BA%A7SQL%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/">
+                <a href="/2021/10/11/qt-li-yong-git-ban-ben-kong-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="轻量级SQL安装及使用">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Qt利用Git版本控制">
                         
-                        <span class="card-title">轻量级SQL安装及使用</span>
+                        <span class="card-title">Qt利用Git版本控制</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            安装教程
+                            Qt中利用Git上传代码到Gitee
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-12
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-10-11
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/SQL/" class="post-category">
-                                    SQL
+                            <a href="/categories/Qt/" class="post-category">
+                                    Qt
                                 </a>
                             
                             
@@ -838,8 +833,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/SQL-Server/">
-                        <span class="chip bg-color">SQL Server</span>
+                    <a href="/tags/Qt/">
+                        <span class="chip bg-color">Qt</span>
                     </a>
                     
                 </div>
@@ -853,19 +848,19 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/10/10/docker%E4%B8%AD%E9%83%A8%E7%BD%B2MYSQL/">
+                <a href="/2021/10/10/docker-zhong-bu-shu-tomcat/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="docker中部署MYSQL">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="docker中部署Tomcat">
                         
-                        <span class="card-title">docker中部署MYSQL</span>
+                        <span class="card-title">docker中部署Tomcat</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            docker中与MYSQL有关操作
+                            docker中与tomcat相关的操作
                         
                     </div>
                     <div class="publish-info">
@@ -887,8 +882,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/MYSQL/">
-                        <span class="chip bg-color">MYSQL</span>
+                    <a href="/tags/Tomcat/">
+                        <span class="chip bg-color">Tomcat</span>
                     </a>
                     
                 </div>
